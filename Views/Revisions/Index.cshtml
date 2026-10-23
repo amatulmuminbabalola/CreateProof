@@ -1,0 +1,178 @@
+﻿@model IEnumerable<CreateProof.Models.Revision>
+
+@{
+    ViewData["Title"] = "Revision Tracking";
+}
+
+<style>
+    .revision-page {
+        background: #F7F5EF;
+        min-height: 80vh;
+        padding: 35px 20px;
+        color: #142B4A;
+    }
+
+    .revision-container {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .revision-header {
+        background: linear-gradient(135deg, #142B4A, #0F8B8D);
+        color: white;
+        padding: 30px;
+        border-radius: 18px;
+        margin-bottom: 25px;
+    }
+
+        .revision-header h1 {
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .revision-header p {
+            margin-bottom: 0;
+            opacity: .9;
+        }
+
+    .revision-card {
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 5px 20px rgba(20, 43, 74, .08);
+    }
+
+    .revision-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .revision-table th,
+        .revision-table td {
+            padding: 15px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .revision-table th {
+            background: #f7f5ef;
+            color: #142B4A;
+        }
+
+    .revision-status {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        background: #e1f5f3;
+        color: #0F7375;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .revision-btn {
+        display: inline-block;
+        background: #0F8B8D;
+        color: white;
+        padding: 11px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .revision-btn:hover {
+            background: #0b6e70;
+            color: white;
+        }
+
+    .revision-empty {
+        text-align: center;
+        padding: 45px 15px;
+        color: #64748b;
+    }
+
+    .revision-action {
+        color: #0F7375;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .revision-table-wrap {
+        overflow-x: auto;
+    }
+</style>
+
+<div class="revision-page">
+    <div class="revision-container">
+        <div class="revision-header">
+            <h1>Revision Tracking</h1>
+            <p>Manage client change requests and monitor their progress.</p>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <a asp-controller="Projects"
+               asp-action="Index"
+               class="revision-btn">
+                Back to Projects
+            </a>
+
+            @if (ViewBag.ProjectId != null)
+            {
+                <a asp-action="Create"
+                   asp-route-projectId="@ViewBag.ProjectId"
+                   class="revision-btn"
+                   style="margin-left: 8px;">
+                    + New Revision
+                </a>
+            }
+        </div>
+
+        <div class="revision-card">
+            @if (Model.Any())
+            {
+                <div class="revision-table-wrap">
+                    <table class="revision-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Project ID</th>
+                                <th>Status</th>
+                                <th>Date Requested</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var revision in Model)
+                            {
+                                <tr>
+                                    <td>@revision.Description</td>
+                                    <td>@revision.ProjectId</td>
+                                    <td>
+                                        <span class="revision-status">
+                                            @revision.Status
+                                        </span>
+                                    </td>
+                                    <td>@revision.RequestedAt.ToLocalTime().ToString("dd MMM yyyy")</td>
+                                    <td>
+                                        <a asp-action="Edit"
+                                           asp-route-id="@revision.Id"
+                                           class="revision-action">
+                                            Update
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="revision-empty">
+                    <h3>No revision requests yet</h3>
+                    <p>Once you add a revision request, it will appear here.</p>
+                    <p>To create one, first open a project and select its revision option.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

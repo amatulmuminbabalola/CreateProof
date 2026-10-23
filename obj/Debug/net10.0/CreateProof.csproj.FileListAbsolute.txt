@@ -96,3 +96,5 @@ C:\Users\USER\OneDrive\Documents\Projects\CreateProof\obj\Debug\net10.0\refint\C
 C:\Users\USER\OneDrive\Documents\Projects\CreateProof\obj\Debug\net10.0\CreateProof.pdb
 C:\Users\USER\OneDrive\Documents\Projects\CreateProof\obj\Debug\net10.0\CreateProof.genruntimeconfig.cache
 C:\Users\USER\OneDrive\Documents\Projects\CreateProof\obj\Debug\net10.0\ref\CreateProof.dll
+C:\Users\USER\OneDrive\Documents\Projects\CreateProof\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Users\USER\OneDrive\Documents\Projects\CreateProof\obj\Debug\net10.0\CreatePr.ECEE8D19.Up2Date
