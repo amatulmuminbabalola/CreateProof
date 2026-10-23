@@ -1,25 +1,22 @@
 ﻿
-using Microsoft.AspNetCore.Mvc;
+using CreateProof.Interfaces.Services;
 using CreateProof.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CreateProof.Controllers
 {
     public class RevisionsController : Controller
     {
-        private static readonly List<Revision> Revisions = new();
+        private readonly IRevisionService _revisionService;
 
-        private static readonly string[] RevisionStatuses =
+        public RevisionsController(IRevisionService revisionService)
         {
-            "Pending",
-            "In Progress",
-            "Completed"
-        };
+            _revisionService = revisionService;
+        }
 
-        public IActionResult Index(int? projectId)
+        public async Task<IActionResult> Index(int? projectId)
         {
-            var revisions = projectId.HasValue
-                ? Revisions.Where(r => r.ProjectId == projectId.Value).ToList()
-                : Revisions;
+            var revisions = await _revisionService.GetAllAsync(projectId);
 
             ViewBag.ProjectId = projectId;
             return View(revisions);
@@ -28,12 +25,16 @@ namespace CreateProof.Controllers
         public IActionResult Create(int projectId)
         {
             ViewBag.ProjectId = projectId;
-            return View(new Revision { ProjectId = projectId });
+
+            return View(new Revision
+            {
+                ProjectId = projectId
+            });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Revision revision)
+        public async Task<IActionResult> Create(Revision revision)
         {
             if (!ModelState.IsValid)
             {
@@ -41,54 +42,53 @@ namespace CreateProof.Controllers
                 return View(revision);
             }
 
-            revision.Id = Revisions.Count == 0
-                ? 1
-                : Revisions.Max(r => r.Id) + 1;
-
-            revision.RequestedAt = DateTime.UtcNow;
-            Revisions.Add(revision);
+            await _revisionService.CreateAsync(revision);
 
             return RedirectToAction(
                 nameof(Index),
                 new { projectId = revision.ProjectId });
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var revision = Revisions.FirstOrDefault(r => r.Id == id);
+            var revision = await _revisionService.GetByIdAsync(id);
 
             if (revision == null)
+            {
                 return NotFound();
+            }
 
             return View(revision);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Revision updatedRevision)
+        public async Task<IActionResult> Edit(
+            int id, Revision updatedRevision)
         {
             if (id != updatedRevision.Id)
+            {
                 return NotFound();
+            }
 
             if (!ModelState.IsValid)
+            {
                 return View(updatedRevision);
+            }
 
-            var revision = Revisions.FirstOrDefault(r => r.Id == id);
+            var existingRevision =
+                await _revisionService.GetByIdAsync(id);
 
-            if (revision == null)
+            if (existingRevision == null)
+            {
                 return NotFound();
+            }
 
-            revision.Description = updatedRevision.Description;
-            revision.Status = updatedRevision.Status;
-
-            if (revision.Status == "Completed")
-                revision.CompletedAt = DateTime.UtcNow;
-            else
-                revision.CompletedAt = null;
+            await _revisionService.UpdateAsync(updatedRevision);
 
             return RedirectToAction(
                 nameof(Index),
-                new { projectId = revision.ProjectId });
+                new { projectId = existingRevision.ProjectId });
         }
     }
 }

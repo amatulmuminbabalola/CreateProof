@@ -1,17 +1,23 @@
 ﻿
-using Microsoft.AspNetCore.Mvc;
+using CreateProof.Interfaces.Services;
 using CreateProof.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CreateProof.Controllers
 {
     public class ProjectsController : Controller
     {
-        // Temporary in-memory storage while MySQL is unavailable.
-        private static readonly List<Project> Projects = new();
+        private readonly IProjectService _projectService;
 
-        public IActionResult Index()
+        public ProjectsController(IProjectService projectService)
         {
-            return View(Projects);
+            _projectService = projectService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var projects = await _projectService.GetAllAsync();
+            return View(projects);
         }
 
         public IActionResult Create()
@@ -21,30 +27,26 @@ namespace CreateProof.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Project project)
+        public async Task<IActionResult> Create(Project project)
         {
             if (!ModelState.IsValid)
             {
                 return View(project);
             }
 
-            project.Id = Projects.Count == 0
-                ? 1
-                : Projects.Max(p => p.Id) + 1;
-
-            Projects.Add(project);
+            await _projectService.CreateAsync(project);
 
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var project = Projects.FirstOrDefault(p => p.Id == id);
+            var project = await _projectService.GetByIdAsync(id.Value);
 
             if (project == null)
             {
