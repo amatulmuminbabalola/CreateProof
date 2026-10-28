@@ -1,0 +1,74 @@
+@model CreateProof.Models.Approval
+
+@{
+ViewData["Title"] = "Approval Details";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Approval Details</h2>    <a asp-action="Index" class="btn btn-outline-secondary">
+        Back to Approvals
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h5 class="mb-0">Approval #@Model.Id</h5>
+    </div>
+
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Approval ID</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+
+            <dt class="col-sm-3">Project ID</dt>
+            <dd class="col-sm-9">@Model.ProjectId</dd>
+
+            <dt class="col-sm-3">Decision</dt>
+            <dd class="col-sm-9">
+                @Model.Decision.ToString()
+            </dd>
+
+            <dt class="col-sm-3">Client Feedback</dt>
+            <dd class="col-sm-9">
+                @if (string.IsNullOrWhiteSpace(Model.ClientFeedback))
+                {
+                    <span class="text-muted">No feedback provided.</span>
+                }
+                else
+                {
+                    @Model.ClientFeedback
+                }
+            </dd>
+
+            <dt class="col-sm-3">Submitted At</dt>
+            <dd class="col-sm-9">
+                @Model.SubmittedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+            </dd>
+
+            <dt class="col-sm-3">Decision At</dt>
+            <dd class="col-sm-9">
+                @(Model.DecisionAt.HasValue
+                    ? Model.DecisionAt.Value.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+                    : "Not decided yet")
+            </dd>
+        </dl>
+    </div>
+
+    <div class="card-footer">
+        @if (Model.Decision == CreateProof.Models.ApprovalDecision.pending)
+        {
+            <a asp-action="Decide"
+               asp-route-id="@Model.Id"
+               class="btn btn-primary">
+                Record Client Decision
+            </a>
+        }
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Close
+        </a>
+    </div>
+</div>
+
+</div>

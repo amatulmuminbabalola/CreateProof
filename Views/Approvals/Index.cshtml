@@ -1,0 +1,90 @@
+@model IEnumerable<CreateProof.Models.Approval>
+
+@{
+ViewData["Title"] = "Client Approvals";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Client Approvals</h2>
+            <p class="text-muted mb-0">
+                Manage project approval requests and client feedback.
+            </p>
+        </div>
+    </div>@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">
+        No approval requests have been created yet.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Approval ID</th>
+                    <th>Project ID</th>
+                    <th>Decision</th>
+                    <th>Submitted</th>
+                    <th>Decision Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var approval in Model)
+                {
+                    <tr>
+                        <td>@approval.Id</td>
+                        <td>@approval.ProjectId</td>
+                        <td>
+                            @switch (approval.Decision)
+                            {
+                                case CreateProof.Models.ApprovalDecision.pending:
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                    break;
+
+                                case CreateProof.Models.ApprovalDecision.Approved:
+                                    <span class="badge bg-success">Approved</span>
+                                    break;
+
+                                case CreateProof.Models.ApprovalDecision.Rejected:
+                                    <span class="badge bg-danger">Rejected</span>
+                                    break;
+
+                                case CreateProof.Models.ApprovalDecision.ChangesRequested:
+                                    <span class="badge bg-info text-dark">Changes Requested</span>
+                                    break;
+                            }
+                        </td>
+                        <td>@approval.SubmittedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")</td>
+                        <td>
+                            @(approval.DecisionAt.HasValue
+                                ? approval.DecisionAt.Value.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+                                : "—")
+                        </td>
+                        <td>
+                            <a asp-action="Details"
+                               asp-route-id="@approval.Id"
+                               class="btn btn-sm btn-outline-primary">
+                                Details
+                            </a>
+
+                            @if (approval.Decision == CreateProof.Models.ApprovalDecision.pending)
+                            {
+                                <a asp-action="Decide"
+                                   asp-route-id="@approval.Id"
+                                   class="btn btn-sm btn-primary">
+                                    Record Decision
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+</div>

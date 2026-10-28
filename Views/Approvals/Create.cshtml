@@ -1,0 +1,55 @@
+@model CreateProof.Models.Approval
+
+@{
+ViewData["Title"] = "Submit Approval Request";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-2">Submit for Client Approval</h2><p class="text-muted mb-4">
+    Create an approval request for a project.
+</p>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="ProjectId" class="form-label">
+                    Project ID
+                </label>
+
+                <input asp-for="ProjectId"
+                       type="number"
+                       min="1"
+                       class="form-control"
+                       readonly />
+
+                <span asp-validation-for="ProjectId"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="alert alert-info">
+                The request will be submitted with a Pending status.
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Submit Request
+            </button>
+
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                Cancel
+            </a>
+        </form>
+    </div>
+</div>
+
+</div>
+@section Scripts {
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

@@ -22,6 +22,35 @@ namespace CreateProof.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("CreateProof.Models.Approval", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClientFeedback")
+                        .HasMaxLength(2000)
+                        .HasColumnType("varchar(2000)");
+
+                    b.Property<int>("Decision")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DecisionAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SubmittedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Approvals");
+                });
+
             modelBuilder.Entity("CreateProof.Models.Project", b =>
                 {
                     b.Property<int>("Id")
