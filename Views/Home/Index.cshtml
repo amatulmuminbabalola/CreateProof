@@ -1,8 +1,382 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    body {
+        background-color: #F7F5EF;
+        color: #243247;
+    }
+
+    .createproof-hero {
+        background: linear-gradient(135deg, #142B4A, #20476A);
+        color: #FFFFFF;
+        border-radius: 24px;
+        padding: 65px 35px;
+        overflow: hidden;
+    }
+
+    .createproof-hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 800;
+        letter-spacing: -1.5px;
+    }
+
+    .createproof-hero p {
+        color: #E0EAF2;
+        font-size: 1.08rem;
+        line-height: 1.8;
+    }
+
+    .brand-name {
+        color: #43D5C5;
+    }
+
+    .btn-createproof {
+        background-color: #0F8B8D;
+        border: 1px solid #0F8B8D;
+        color: #FFFFFF;
+        border-radius: 9px;
+        padding: 13px 23px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-createproof:hover {
+        background-color: #0B7173;
+        color: #FFFFFF;
+    }
+
+    .btn-outline-light-custom {
+        color: #FFFFFF;
+        border: 1px solid #A9C2D6;
+        border-radius: 9px;
+        padding: 13px 23px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .section-label {
+        color: #0F8B8D;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.78rem;
+    }
+
+    .feature-card {
+        background: #FFFFFF;
+        border: 1px solid #E6E8E9;
+        border-radius: 16px;
+        padding: 28px;
+        height: 100%;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(20, 43, 74, 0.09);
+    }
+
+    .feature-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background: #E4F5F2;
+        color: #0F7779;
+        border-radius: 12px;
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+        color: #142B4A;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    .feature-card p {
+        color: #657386;
+        line-height: 1.75;
+        margin-bottom: 0;
+    }
+
+    .workflow-box {
+        background: #E8EFEE;
+        border-radius: 18px;
+        padding: 30px;
+    }
+
+    .workflow-step {
+        background: #FFFFFF;
+        border-radius: 12px;
+        padding: 18px 12px;
+        text-align: center;
+        height: 100%;
+    }
+
+    .workflow-number {
+        color: #0F8B8D;
+        font-size: 0.8rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+    }
+
+    .workflow-step strong {
+        color: #142B4A;
+        font-size: 0.95rem;
+    }
+
+    .closing-banner {
+        background: #142B4A;
+        color: #FFFFFF;
+        border-radius: 18px;
+        padding: 35px;
+    }
+
+    .closing-banner p {
+        color: #D8E4ED;
+    }
+
+    .createproof-footer {
+        color: #748093;
+        font-size: 0.88rem;
+    }
+</style>
+
+<div class="container py-4 py-lg-5">
+
+    <section class="createproof-hero mb-5">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-8">
+                <div class="mb-3 fw-semibold">
+                    <span class="brand-name">CREATEPROOF</span>
+                    <span class="mx-2">/</span>
+                    Made for creative professionals
+                </div>
+
+                <h1>
+                    Your creativity.<br />
+                    Your projects.<br />
+                    <span class="brand-name">Your control.</span>
+                </h1>
+
+                <p class="mt-4 mb-4">
+                    Stop losing track of revisions, approvals and payments.
+                    Manage your creative work in one organised workspace
+                    and spend more time doing what you do best.
+                </p>
+
+                <a href="/Projects" class="btn-createproof me-2 mb-2">
+                    Explore Projects &rarr;
+                </a>
+
+                <a href="#features"
+                   class="btn-outline-light-custom mb-2">
+                    Discover Features
+                </a>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="p-4"
+                     style="background:rgba(255,255,255,0.08);
+                    border:1px solid rgba(255,255,255,0.15);
+                    border-radius:18px;">
+
+                    <div class="small mb-3"
+                         style="color:#BBD2E3;">
+                        YOUR CREATIVE WORKSPACE
+                    </div>
+
+                    <div class="p-3 mb-3"
+                         style="background:#FFFFFF;border-radius:12px;">
+                        <div class="small text-muted">Project progress</div>
+                        <div class="fw-bold mt-1"
+                             style="color:#142B4A;">
+                            Brand Identity Design
+                        </div>
+                        <div class="progress mt-3"
+                             style="height:7px;">
+                            <div class="progress-bar"
+                                 role="progressbar"
+                                 style="width:75%;background:#0F8B8D;"
+                                 aria-valuenow="75"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+                            </div>
+                        </div>
+                        <div class="small mt-2"
+                             style="color:#657386;">
+                            Example project preview
+                        </div>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <div class="p-3"
+                                 style="background:#DDF4EF;
+                                border-radius:12px;">
+                                <div style="font-size:1.35rem;">✓</div>
+                                <div class="small fw-bold"
+                                     style="color:#146A62;">
+                                    Approvals
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="p-3"
+                                 style="background:#F8EBD0;
+                                border-radius:12px;">
+                                <div style="font-size:1.35rem;">₦</div>
+                                <div class="small fw-bold"
+                                     style="color:#805B16;">
+                                    Payments
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="mb-5 py-3">
+        <div class="text-center mb-4">
+            <div class="section-label mb-2">Everything in one place</div>
+            <h2 class="fw-bold" style="color:#142B4A;">
+                Work smarter, not harder.
+            </h2>
+            <p class="text-muted">
+                The essential tools to keep every creative project organised.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card">
+                    <div class="feature-icon">▦</div>
+                    <h3>Project Management</h3>
+                    <p>
+                        Organise clients, project details, deadlines,
+                        agreed prices and project progress in one place.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card">
+                    <div class="feature-icon">↻</div>
+                    <h3>Revision Tracking</h3>
+                    <p>
+                        Record change requests, track revision status
+                        and keep a clear history of project changes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card">
+                    <div class="feature-icon">✓</div>
+                    <h3>Client Approvals</h3>
+                    <p>
+                        Record approval decisions, feedback and changes
+                        requested before marking work as complete.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card">
+                    <div class="feature-icon">₦</div>
+                    <h3>Payment Records</h3>
+                    <p>
+                        Track deposits, subsequent payments and
+                        outstanding balances for each project.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card">
+                    <div class="feature-icon">◷</div>
+                    <h3>Deadline Awareness</h3>
+                    <p>
+                        Keep important due dates visible and know
+                        which projects need your attention.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card">
+                    <div class="feature-icon">◎</div>
+                    <h3>Built for Creatives</h3>
+                    <p>
+                        Designed for graphic designers, photographers,
+                        videographers, writers and other creatives.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="workflow-box mb-5">
+        <div class="text-center mb-4">
+            <div class="section-label mb-2">A simpler workflow</div>
+            <h2 class="fw-bold" style="color:#142B4A;">
+                From brief to completion.
+            </h2>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-6 col-lg-3">
+                <div class="workflow-step">
+                    <div class="workflow-number">STEP 01</div>
+                    <strong>Create a project</strong>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="workflow-step">
+                    <div class="workflow-number">STEP 02</div>
+                    <strong>Track revisions</strong>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="workflow-step">
+                    <div class="workflow-number">STEP 03</div>
+                    <strong>Record approval</strong>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="workflow-step">
+                    <div class="workflow-number">STEP 04</div>
+                    <strong>Track payments</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="closing-banner text-center mb-4">
+        <h2 class="fw-bold">Bring clarity to your creative business.</h2>
+        <p class="mt-3 mb-4">
+            One organised place for your projects, revisions,
+            approvals and payment records.
+        </p>
+        <a href="/Projects" class="btn-createproof">
+            Get Started &rarr;
+        </a>
+    </section>
+
+    <footer class="createproof-footer text-center py-3">
+        &copy; @DateTime.Now.Year CreateProof. Built for creative professionals.
+    </footer>
+
 </div>

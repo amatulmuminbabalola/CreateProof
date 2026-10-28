@@ -1,7 +1,28 @@
+using CreateProof.Data;
+using CreateProof.Interfaces.Repositories;
+using CreateProof.Interfaces.Services;
+using CreateProof.Repositories;
+using CreateProof.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IRevisionRepository, RevisionRepository>();
+builder.Services.AddScoped<IRevisionService, RevisionService>();
+builder.Services.AddScoped<IApprovalService, ApprovalService>();
+builder.Services.AddScoped<IApprovalRepository, ApprovalRepository>();
+
+var connectionString = builder.Configuration
+    .GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(
+        connectionString,
+        ServerVersion.AutoDetect(connectionString)));
 
 var app = builder.Build();
 

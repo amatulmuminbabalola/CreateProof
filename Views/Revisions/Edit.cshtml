@@ -1,0 +1,114 @@
+﻿@model CreateProof.Models.Revision
+
+@{
+    ViewData["Title"] = "Edit Revision";
+}
+
+<style>
+    body {
+        background: #F7F5EF;
+    }
+
+    .revision-page {
+        max-width: 750px;
+        margin: 35px auto;
+        padding: 20px;
+        color: #142B4A;
+    }
+
+    .revision-card {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 5px 20px rgba(20, 43, 74, 0.08);
+    }
+
+    .revision-page h1 {
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .revision-page .subtitle {
+        color: #687386;
+        margin-bottom: 25px;
+    }
+
+    .revision-page label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .revision-page .form-control,
+    .revision-page .form-select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #D8DEE8;
+        border-radius: 8px;
+        margin-bottom: 18px;
+    }
+
+    .revision-page .primary-btn {
+        background: #0F8B8D;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .revision-page .back-link {
+        color: #142B4A;
+        text-decoration: none;
+        margin-left: 15px;
+    }
+
+    .revision-page .validation {
+        color: #B42318;
+        display: block;
+        margin-top: -12px;
+        margin-bottom: 12px;
+    }
+</style>
+
+<div class="revision-page">
+    <h1>Edit Revision</h1>
+    <p class="subtitle">
+        Update the requested changes or track their progress.
+    </p>
+
+    <div class="revision-card">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ProjectId" />
+
+            <label asp-for="Description">Revision Description</label>
+            <textarea asp-for="Description"
+                      class="form-control"
+                      rows="5"
+                      required></textarea>
+            <span asp-validation-for="Description" class="validation"></span>
+
+            <label asp-for="Status">Revision Status</label>
+            <select asp-for="Status" class="form-select">
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+            <span asp-validation-for="Status" class="validation"></span>
+
+            <button type="submit" class="primary-btn">
+                Save Changes
+            </button>
+
+            <a asp-action="Index"
+               asp-route-projectId="@Model.ProjectId"
+               class="back-link">
+                Cancel
+            </a>
+        </form>
+    </div>
+</div>

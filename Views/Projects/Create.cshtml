@@ -1,0 +1,368 @@
+﻿@model CreateProof.Models.Project
+
+@{
+    ViewData["Title"] = "Create Project";
+}
+
+<style>
+    .create-page {
+        min-height: 100vh;
+        padding: 42px 16px;
+        background: #f7f5ef;
+        color: #142b4a;
+    }
+
+    .create-wrapper {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .create-back {
+        color: #0f8b8d;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .create-back:hover {
+            color: #142b4a;
+        }
+
+    .create-heading {
+        margin: 22px 0 28px;
+    }
+
+        .create-heading h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .create-heading p {
+            color: #69788b;
+            font-size: 1.05rem;
+        }
+
+    .create-layout {
+        display: grid;
+        grid-template-columns: 0.85fr 1.4fr;
+        gap: 24px;
+        align-items: start;
+    }
+
+    .create-intro {
+        background: linear-gradient(145deg, #142b4a, #0f686f);
+        color: white;
+        border-radius: 22px;
+        padding: 32px 26px;
+        min-height: 390px;
+        box-shadow: 0 12px 30px rgba(20, 43, 74, 0.12);
+    }
+
+    .create-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 58px;
+        height: 58px;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.14);
+        font-size: 28px;
+        margin-bottom: 28px;
+    }
+
+    .create-intro h2 {
+        font-size: 1.8rem;
+        font-weight: 750;
+        line-height: 1.3;
+    }
+
+    .create-intro > p {
+        color: #e0ebee;
+        line-height: 1.8;
+        margin-top: 14px;
+    }
+
+    .create-tip {
+        margin-top: 30px;
+        padding: 16px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 14px;
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+
+    .create-card {
+        background: white;
+        border: 1px solid #e8e8e1;
+        border-radius: 22px;
+        padding: 30px;
+        box-shadow: 0 12px 35px rgba(20, 43, 74, 0.06);
+    }
+
+        .create-card h3 {
+            font-weight: 750;
+            margin-bottom: 6px;
+        }
+
+        .create-card .subtitle {
+            color: #788394;
+            margin-bottom: 25px;
+        }
+
+        .create-card .form-label {
+            color: #243d59;
+            font-weight: 650;
+            margin-bottom: 8px;
+        }
+
+        .create-card .form-control,
+        .create-card .form-select {
+            border: 1px solid #dfe5e8;
+            border-radius: 10px;
+            padding: 12px 14px;
+            min-height: 48px;
+            background-color: #fff;
+        }
+
+        .create-card textarea.form-control {
+            min-height: 110px;
+        }
+
+        .create-card .form-control:focus,
+        .create-card .form-select:focus {
+            border-color: #0f8b8d;
+            box-shadow: 0 0 0 3px rgba(15, 139, 141, 0.12);
+        }
+
+        .create-card .form-text {
+            color: #7b8794;
+            font-size: 0.82rem;
+        }
+
+    .create-primary {
+        background: #0f8b8d;
+        border: 1px solid #0f8b8d;
+        color: white;
+        border-radius: 10px;
+        padding: 12px 22px;
+        font-weight: 700;
+        transition: 0.2s ease;
+    }
+
+        .create-primary:hover {
+            background: #0b6f72;
+            border-color: #0b6f72;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+    .create-secondary {
+        border: 1px solid #dfe5e8;
+        color: #142b4a;
+        background: white;
+        border-radius: 10px;
+        padding: 12px 20px;
+        font-weight: 600;
+    }
+
+        .create-secondary:hover {
+            background: #f3f5f5;
+            color: #142b4a;
+        }
+
+    .create-divider {
+        height: 1px;
+        background: #edf0f1;
+        margin: 24px 0;
+    }
+
+    @@media (max-width: 768px) {
+        .create-page {
+            padding: 25px 12px;
+        }
+
+        .create-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .create-intro {
+            min-height: auto;
+            padding: 25px;
+        }
+
+            .create-intro .create-tip {
+                margin-top: 20px;
+            }
+
+        .create-card {
+            padding: 22px 18px;
+        }
+    }
+</style>
+
+<div class="create-page">
+    <div class="create-wrapper">
+
+        <a asp-action="Index" class="create-back">
+            &larr; Back to My Projects
+        </a>
+
+        <div class="create-heading">
+            <h1>Bring your next idea to life.</h1>
+            <p>
+                Set up your project, organise the details, and keep your
+                creative work on track.
+            </p>
+        </div>
+
+        <div class="create-layout">
+
+            <aside class="create-intro">
+                <div class="create-icon">✦</div>
+
+                <h2>Your next great project starts here.</h2>
+
+                <p>
+                    Keep your client agreements, deadlines and project
+                    details organised in one place.
+                </p>
+
+                <div class="create-tip">
+                    <strong>💡 Pro tip</strong>
+                    <br />
+                    Agree on the project scope, price and deadline with
+                    your client before starting the work.
+                </div>
+
+                <div class="create-tip">
+                    <strong>YOUR WORK. YOUR RECORDS.</strong>
+                    <br />
+                    Create a clear record of every project from the start.
+                </div>
+            </aside>
+
+            <section class="create-card">
+                <h3>Project details</h3>
+                <p class="subtitle">
+                    Fill in the information below to get started.
+                </p>
+
+                <form asp-controller="Projects"
+                      asp-action="Create"
+                      method="post">
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger mb-3"></div>
+
+                    <div class="mb-4">
+                        <label asp-for="Title" class="form-label">
+                            Project title *
+                        </label>
+                        <input asp-for="Title"
+                               class="form-control"
+                               placeholder="e.g. Brand identity design" />
+                        <span asp-validation-for="Title"
+                              class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="ClientName" class="form-label">
+                            Client name *
+                        </label>
+                        <input asp-for="ClientName"
+                               class="form-control"
+                               placeholder="Who is this project for?" />
+                        <span asp-validation-for="ClientName"
+                              class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="CreativeWorkType"
+                               class="form-label">
+                            Creative work type *
+                        </label>
+                        <select asp-for="CreativeWorkType"
+                                class="form-select">
+                            <option value="">Choose a category</option>
+                            <option>Graphic Design</option>
+                            <option>Photography</option>
+                            <option>Videography</option>
+                            <option>Video Editing</option>
+                            <option>Writing</option>
+                            <option>Illustration</option>
+                            <option>Content Creation</option>
+                            <option>Animation</option>
+                            <option>Web Design</option>
+                            <option>Other</option>
+                        </select>
+                        <span asp-validation-for="CreativeWorkType"
+                              class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Description" class="form-label">
+                            Project description
+                        </label>
+                        <textarea asp-for="Description"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Describe the work, deliverables and client requirements..."></textarea>
+                        <span asp-validation-for="Description"
+                              class="text-danger small"></span>
+                    </div>
+
+                    <div class="create-divider"></div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label asp-for="AgreedPrice"
+                                   class="form-label">
+                                Agreed price (₦) *
+                            </label>
+                            <input asp-for="AgreedPrice"
+                                   type="number"
+                                   min="0"
+                                   step="0.01"
+                                   class="form-control"
+                                   placeholder="50000" />
+                            <div class="form-text">
+                                Enter the total agreed amount.
+                            </div>
+                            <span asp-validation-for="AgreedPrice"
+                                  class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label asp-for="Deadline" class="form-label">
+                                Deadline
+                            </label>
+                            <input asp-for="Deadline"
+                                   type="date"
+                                   class="form-control" />
+                            <span asp-validation-for="Deadline"
+                                  class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        <button type="submit" class="btn create-primary">
+                            Create project &rarr;
+                        </button>
+
+                        <a asp-action="Index"
+                           class="btn create-secondary">
+                            Cancel
+                        </a>
+                    </div>
+
+                </form>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

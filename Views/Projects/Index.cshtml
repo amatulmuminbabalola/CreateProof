@@ -1,0 +1,474 @@
+﻿@model IEnumerable<CreateProof.Models.Project>
+
+@{
+    ViewData["Title"] = "My Projects";
+    var projects = Model?.ToList() ?? new List<CreateProof.Models.Project>();
+    var activeProjects = projects.Count(p =>
+        !string.Equals(p.Status, "Completed", StringComparison.OrdinalIgnoreCase));
+    var completedProjects = projects.Count(p =>
+        string.Equals(p.Status, "Completed", StringComparison.OrdinalIgnoreCase));
+    var totalValue = projects.Sum(p => p.AgreedPrice);
+}
+
+<style>
+    .projects-page {
+        min-height: 100vh;
+        padding: 38px 16px 60px;
+        background: #f7f5ef;
+        color: #142b4a;
+    }
+
+    .projects-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .projects-welcome {
+        background: linear-gradient(125deg, #142b4a, #0f686f);
+        color: white;
+        padding: 34px;
+        border-radius: 22px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 28px;
+        box-shadow: 0 12px 30px rgba(20, 43, 74, .12);
+    }
+
+        .projects-welcome::after {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            right: -65px;
+            top: -100px;
+            border: 35px solid rgba(255,255,255,.07);
+            border-radius: 50%;
+        }
+
+        .projects-welcome h1 {
+            font-weight: 800;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .projects-welcome p {
+            color: #e1eeee;
+            max-width: 580px;
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+    .projects-primary {
+        display: inline-block;
+        background: #ffffff;
+        color: #142b4a;
+        padding: 12px 19px;
+        border-radius: 10px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: .2s ease;
+    }
+
+        .projects-primary:hover {
+            background: #e3f5f1;
+            color: #142b4a;
+            transform: translateY(-2px);
+        }
+
+    .projects-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-bottom: 30px;
+    }
+
+    .projects-stat {
+        padding: 22px;
+        border-radius: 17px;
+        border: 1px solid #e7e7df;
+        background: white;
+        box-shadow: 0 5px 18px rgba(20,43,74,.035);
+    }
+
+    .projects-stat-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 18px;
+        color: #68788b;
+        font-size: .93rem;
+    }
+
+    .projects-stat-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        font-size: 20px;
+    }
+
+    .stat-blue {
+        background: #e9effb;
+    }
+
+    .stat-teal {
+        background: #e1f5f0;
+    }
+
+    .stat-gold {
+        background: #fff1d8;
+    }
+
+    .projects-stat h2 {
+        font-size: 1.9rem;
+        font-weight: 800;
+        margin: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .projects-stat small {
+        color: #7c8795;
+        display: block;
+        margin-top: 6px;
+    }
+
+    .projects-section {
+        background: white;
+        border: 1px solid #e7e7df;
+        border-radius: 20px;
+        padding: 26px;
+        box-shadow: 0 8px 24px rgba(20,43,74,.04);
+    }
+
+    .projects-section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 22px;
+    }
+
+        .projects-section-header h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin: 0 0 5px;
+        }
+
+        .projects-section-header p {
+            color: #7c8795;
+            margin: 0;
+            font-size: .93rem;
+        }
+
+    .projects-add {
+        background: #0f8b8d;
+        color: white;
+        border: 1px solid #0f8b8d;
+        border-radius: 10px;
+        padding: 10px 16px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: .2s ease;
+    }
+
+        .projects-add:hover {
+            background: #0b6f72;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+    .projects-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .projects-table thead th {
+            background: #f3f6f5;
+            color: #52647a;
+            font-size: .79rem;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding: 15px 13px;
+            border-bottom: 1px solid #e5eae9;
+            white-space: nowrap;
+        }
+
+            .projects-table thead th:first-child {
+                border-radius: 10px 0 0 10px;
+            }
+
+            .projects-table thead th:last-child {
+                border-radius: 0 10px 10px 0;
+            }
+
+        .projects-table tbody td {
+            padding: 17px 13px;
+            border-bottom: 1px solid #edf0ef;
+            color: #45566b;
+            vertical-align: middle;
+        }
+
+        .projects-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .projects-table tbody tr:hover {
+            background: #fafcfb;
+        }
+
+    .project-name {
+        color: #142b4a;
+        font-weight: 750;
+    }
+
+    .project-client {
+        color: #7c8795;
+        font-size: .85rem;
+        margin-top: 4px;
+    }
+
+    .project-status {
+        display: inline-block;
+        padding: 6px 11px;
+        border-radius: 30px;
+        background: #fff1d8;
+        color: #895c12;
+        font-size: .79rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+        .project-status.completed {
+            background: #e1f5e9;
+            color: #207348;
+        }
+
+        .project-status.in-progress {
+            background: #e5efff;
+            color: #285b9d;
+        }
+
+    .projects-empty {
+        text-align: center;
+        padding: 42px 20px;
+        background: linear-gradient(135deg, #f7f9fc, #f0f8f5);
+        border: 1px dashed #cddbd9;
+        border-radius: 16px;
+    }
+
+    .projects-empty-icon {
+        width: 72px;
+        height: 72px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 18px;
+        border-radius: 22px;
+        background: #dff3ed;
+        font-size: 32px;
+    }
+
+    .projects-empty h3 {
+        color: #142b4a;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+
+    .projects-empty p {
+        color: #718094;
+        max-width: 420px;
+        line-height: 1.8;
+        margin: 0 auto 22px;
+    }
+
+    .projects-empty .projects-add {
+        display: inline-block;
+    }
+
+    .projects-footer-note {
+        margin-top: 22px;
+        padding: 15px 18px;
+        border-radius: 13px;
+        background: #e9f4f1;
+        color: #416d6b;
+        font-size: .88rem;
+        line-height: 1.7;
+    }
+
+    @@media (max-width: 768px) {
+        .projects-page {
+            padding: 24px 12px 40px;
+        }
+
+        .projects-welcome {
+            padding: 25px 21px;
+        }
+
+        .projects-stats {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .projects-stat {
+            padding: 18px;
+        }
+
+        .projects-section {
+            padding: 19px 14px;
+        }
+
+        .projects-table {
+            min-width: 720px;
+        }
+    }
+</style>
+
+<div class="projects-page">
+    <div class="projects-wrapper">
+
+        <section class="projects-welcome">
+            <h1>Your creativity, organised.</h1>
+            <p>
+                Welcome to your project space. Keep track of your clients,
+                creative work and deadlines, all in one place.
+            </p>
+
+            <a asp-controller="Projects"
+               asp-action="Create"
+               class="projects-primary">
+                + Start a New Project
+            </a>
+        </section>
+
+        <section class="projects-stats">
+            <div class="projects-stat">
+                <div class="projects-stat-top">
+                    <span>Total projects</span>
+                    <span class="projects-stat-icon stat-blue">📁</span>
+                </div>
+                <h2>@projects.Count</h2>
+                <small>Projects in your workspace</small>
+            </div>
+
+            <div class="projects-stat">
+                <div class="projects-stat-top">
+                    <span>Active projects</span>
+                    <span class="projects-stat-icon stat-teal">⚡</span>
+                </div>
+                <h2>@activeProjects</h2>
+                <small>Projects not marked completed</small>
+            </div>
+
+            <div class="projects-stat">
+                <div class="projects-stat-top">
+                    <span>Completed projects</span>
+                    <span class="projects-stat-icon stat-gold">✓</span>
+                </div>
+                <h2>@completedProjects</h2>
+                <small>Finished creative work</small>
+            </div>
+        </section>
+
+        <section class="projects-section">
+            <div class="projects-section-header">
+                <div>
+                    <h2>Your projects</h2>
+                    <p>Every idea deserves a well-organised workspace.</p>
+                </div>
+
+                <a asp-controller="Projects"
+                   asp-action="Create"
+                   class="projects-add">
+                    + New Project
+                </a>
+            </div>
+
+            @if (projects.Count == 0)
+            {
+                <div class="projects-empty">
+                    <div class="projects-empty-icon">✦</div>
+                    <h3>Your next big idea starts here.</h3>
+                    <p>
+                        You haven't added any projects yet. Create your first
+                        project to keep client details, prices and deadlines
+                        organised from day one.
+                    </p>
+                    <a asp-controller="Projects"
+                       asp-action="Create"
+                       class="projects-add">
+                        Create Your First Project →
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="projects-table">
+                        <thead>
+                            <tr>
+                                <th>Project &amp; client</th>
+                                <th>Creative type</th>
+                                <th>Agreed price</th>
+                                <th>Deadline</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var project in projects)
+                            {
+                                var status = project.Status ?? "Pending";
+                                var statusClass =
+                                    status.Equals("Completed", StringComparison.OrdinalIgnoreCase)
+                                        ? "completed"
+                                        : status.Equals("In Progress", StringComparison.OrdinalIgnoreCase)
+                                            ? "in-progress"
+                                            : "";
+
+                                <tr>
+                                    <td>
+                                        <div class="project-name">
+                                            @project.Title
+                                            <a asp-controller="Revisions"
+                                               asp-action="Index"
+                                               asp-route-projectId="@project.Id">
+                                                Manage Revisions
+                                            </a>
+                                        </div>
+                                        <div class="project-client">
+                                            Client: @project.ClientName
+                                        </div>
+                                    </td>
+                                    <td>@project.CreativeWorkType</td>
+                                    <td>
+                                        ₦@project.AgreedPrice.ToString("N2")
+                                    </td>
+                                    <td>
+                                        @(project.Deadline?.ToString("dd MMM yyyy") ?? "Not set")
+                                    </td>
+                                    <td>
+                                        <span class="project-status @statusClass">
+                                            @status
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </section>
+
+        <div class="projects-footer-note">
+            <strong>✦ A little more clarity, every day.</strong>
+            Keep project details organised so you can focus on doing your
+            best creative work.
+        </div>
+
+    </div>
+</div>
