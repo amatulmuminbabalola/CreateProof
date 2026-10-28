@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\createProof\\CreateProof.csproj": {}
+    "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\CreateProof\\CreateProof.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\createProof\\CreateProof.csproj": {
+    "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\CreateProof\\CreateProof.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\createProof\\CreateProof.csproj",
+        "projectUniqueName": "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\CreateProof\\CreateProof.csproj",
         "projectName": "CreateProof",
-        "projectPath": "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\createProof\\CreateProof.csproj",
+        "projectPath": "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\CreateProof\\CreateProof.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\createProof\\obj\\",
+        "outputPath": "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\CreateProof\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

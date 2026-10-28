@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CreateProof")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74525ed56ddd5a190fa54f28343dc4d29283737a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7de33cf1cd9cd44e803548cb5d5b14247f3b74b")]
 [assembly: System.Reflection.AssemblyProductAttribute("CreateProof")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CreateProof")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

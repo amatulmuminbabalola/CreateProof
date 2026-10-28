@@ -1,0 +1,96 @@
+@model CreateProof.ViewModels.ProjectBriefs.ConfirmProjectBriefViewModel
+
+@{
+ViewData["Title"] = "Review Project Brief";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-header bg-primary text-white p-4">
+                <h2 class="mb-1">Review Project Brief</h2>
+                <p class="mb-0">
+                    Review the terms and confirm your decision.
+                </p>
+            </div>
+
+            <div class="card-body p-4 p-md-5">
+
+                <div class="alert alert-info" role="alert">
+                    <strong>Before you continue:</strong>
+                    Make sure you have reviewed the project description,
+                    deliverables, deadline, price, included revisions,
+                    and payment terms.
+                </div>
+
+                <form asp-action="Confirm" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="alert alert-danger"
+                         role="alert"></div>
+
+                    <input asp-for="Id" type="hidden" />
+
+                    <div class="mb-4">
+                        <label asp-for="Decision" class="form-label fw-semibold">
+                            Your Decision
+                        </label>
+
+                        <select asp-for="Decision" class="form-select">
+                            <option value="">-- Select your decision --</option>
+                            <option value="Confirmed">Confirm Project Brief</option>
+                            <option value="ChangesRequested">Request Changes</option>
+                        </select>
+
+                        <span asp-validation-for="Decision"
+                              class="text-danger"></span>
+
+                        <div class="form-text">
+                            Confirm the brief if you agree with its terms.
+                            Otherwise, request changes.
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Comments" class="form-label fw-semibold">
+                            Comments (Optional)
+                        </label>
+
+                        <textarea asp-for="Comments"
+                                  class="form-control"
+                                  rows="5"
+                                  placeholder="Add any feedback or explain the changes you require..."></textarea>
+
+                        <span asp-validation-for="Comments"
+                              class="text-danger"></span>
+                    </div>
+
+                    <div class="alert alert-warning" role="alert">
+                        Confirming this brief records your acceptance of
+                        the proposed project terms in CreateProof.
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="submit" class="btn btn-success px-4">
+                            Submit Decision
+                        </button>
+
+                        <a asp-action="Details"
+                           asp-route-id="@Model.Id"
+                           class="btn btn-outline-secondary px-4">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
