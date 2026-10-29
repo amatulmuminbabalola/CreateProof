@@ -17,6 +17,9 @@ builder.Services.AddScoped<IApprovalService, ApprovalService>();
 builder.Services.AddScoped<IApprovalRepository, ApprovalRepository>();
 builder.Services.AddScoped<IProjectBriefService, ProjectBriefService>();
 builder.Services.AddScoped<IProjectBriefRepositories, ProjectBriefRepositories>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<INotificationRepositories, NotificationRepositories>();
+
 
 var connectionString = builder.Configuration
     .GetConnectionString("DefaultConnection");
