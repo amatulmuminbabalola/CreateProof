@@ -15,5 +15,6 @@ namespace CreateProof.Data
 
         public DbSet<Revision> Revisions => Set<Revision>();
         public DbSet<Approval> Approvals => Set<Approval>();
+        public DbSet<ProjectBrief> ProjectBriefs => Set<ProjectBrief>();
     }
 }
