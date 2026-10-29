@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\createProof\\CreateProof.csproj": {}
+    "C:\\Users\\USER\\source\\repos\\CreateProof\\CreateProof.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\createProof\\CreateProof.csproj": {
+    "C:\\Users\\USER\\source\\repos\\CreateProof\\CreateProof.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\createProof\\CreateProof.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\source\\repos\\CreateProof\\CreateProof.csproj",
         "projectName": "CreateProof",
-        "projectPath": "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\createProof\\CreateProof.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\OneDrive\\Desktop\\All ahmadannur unfinished and finished project\\new\\createProof\\obj\\",
+        "projectPath": "C:\\Users\\USER\\source\\repos\\CreateProof\\CreateProof.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\source\\repos\\CreateProof\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
